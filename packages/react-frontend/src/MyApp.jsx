@@ -18,7 +18,9 @@ function MyApp(){
                 characterData={characters}
                 removeCharacter={removeOneCharacter}
             /> {/*pass characters data to the table functions.*/}
-            <Form />
+            <Form 
+                handleSubmit={updateList}
+            />
         </div>
     );
 
@@ -28,6 +30,11 @@ function MyApp(){
             return i !== index;
         });
         setCharacters(updated);
+    }
+
+    //
+    function updateList(person){
+        setCharacters([...characters, person]);
     }
 }
 
