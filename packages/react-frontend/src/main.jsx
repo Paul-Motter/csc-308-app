@@ -4,13 +4,7 @@ import ReactDOMClient from "react-dom/client";
 import MyApp from "./MyApp"; //Doesnt need the suffix since vite can accept js, jsx, and ts type files and turn them into js.
 import "./main.css";
 
-// function MyApp() {
-//   return (
-//     <div>
-//       <h1>Hello, React!</h1>
-//     </div>
-//   );
-// }
+//Remember that when a component state changes, it triggers an update on the child components.
 
 // Create the container
 const container = document.getElementById("root");
