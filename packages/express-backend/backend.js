@@ -86,9 +86,23 @@ const addUser = (user) => {
 //POST /users
 app.post("/users", (req, res) => {
     const userToAdd = req.body;
+    userToAdd.id = generateId();
     addUser(userToAdd);
-    res.send();
+    res.status(201).send(req.body);
 });
+//generate a 6 digit random unique id for an added user.
+function generateId(){
+    do{
+        //generate id.
+        var id = "";
+        for (let i = 0; i < 6; i++){
+            //get one chaaracter to add to the id.
+            id+=((Math.floor(Math.random()*10)).toString());
+        }
+    //check for duplicate ids.
+    } while (users.users_list.filter((user) => id == user.id).length !== 0)
+    return id;
+}
 
 //Function for DELETE /users/:id
 const deleteUser = (id) => {

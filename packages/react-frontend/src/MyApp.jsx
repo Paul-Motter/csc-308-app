@@ -46,7 +46,12 @@ function MyApp(){
     //upadtes the list with another character/person.
     function updateList(person){
         postUser(person)
-            .then(() => setCharacters([...characters, person]))
+            .then((res) => {
+                if (res.status !== 201) throw new Error("Improper status code. Is not 201: " + res.status)
+                else {
+                    setCharacters([...characters, person]);
+                }
+            })
             .catch((error) => console.log(error));
     }
 
