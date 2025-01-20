@@ -46,7 +46,7 @@ const users = {
     ]
   };
 
-//GET /users
+//GET /users Test
 app.get("/users", (req, res) => {
     let result = users.users_list;
     if (req.query.job != undefined){
