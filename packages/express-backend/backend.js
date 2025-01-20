@@ -88,7 +88,7 @@ app.post("/users", (req, res) => {
     const userToAdd = req.body;
     userToAdd.id = generateId();
     addUser(userToAdd);
-    res.status(201).send(req.body);
+    res.status(201).send(userToAdd);
 });
 //generate a 6 digit random unique id for an added user.
 function generateId(){
@@ -116,6 +116,6 @@ app.delete("/users/:id", (req, res) => {
     if (length === users.users_list.length){
         res.status(404).send("Resource not found.")
     } else {
-        res.send();
+        res.status(204).send();
     }
 });

@@ -38,10 +38,26 @@ function MyApp(){
     //uses useState with seCharacters.
     //finds the character at the index and removes it from the list of characters and then setCharacters to the updated list.
     function removeOneCharacter(index) {
-        const updated = characters.filter((character, i) => {
-            return i !== index;
-        });
-        setCharacters(updated);
+        const characterToRemove = characters.filter((character, i) => {
+            return i == index;
+        })[0];
+        //call endpoint.
+        deleteUser(characterToRemove.id)
+            .then((res) => {
+                //if user not found.
+                if (res.status === 404) {
+                    throw new Error("Resource not found")}
+                //if user found and deleted on backend
+                else if(res.status === 204){
+                    setCharacters(characters.filter((character, i) => {
+                        return i !== index;
+                    }));
+                //any unexpected response.
+                } else {
+                    throw new Error("Improper Status code. " + res.status + " not recognized.")
+                }
+            })
+            .catch((error) => console.log(error));
     }
     //upadtes the list with another character/person.
     function updateList(person){
@@ -49,9 +65,10 @@ function MyApp(){
             .then((res) => {
                 if (res.status !== 201) throw new Error("Improper status code. Is not 201: " + res.status)
                 else {
-                    setCharacters([...characters, person]);
+                    return res.json();
                 }
             })
+            .then((json) => setCharacters([...characters, json]))
             .catch((error) => console.log(error));
     }
 
@@ -66,6 +83,13 @@ function MyApp(){
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(person),
         });
+        return promise;
+    }
+
+    function deleteUser(id) {
+        const promise = fetch(`Http://localhost:8000/users/${id}` , {
+            method: "DELETE"
+        })
         return promise;
     }
 }
