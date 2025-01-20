@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd ./packages/react-frontend/ && npm run dev",
+    "dev": "npm run backdev && npm run frontdev",
     "backdev": "npm run -w express-backend dev",
     "frontdev": "npm run -w react-frontend dev"
   },

@@ -1,9 +1,11 @@
 // backend.js
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
 
+app.use(cors());
 app.use(express.json());
 
 //GET / root endpoint
@@ -55,7 +57,7 @@ app.get("/users", (req, res) => {
     if (req.query.name != undefined){
         result = result.filter((user) => user.name === req.query.name)
     }
-    res.send(result);
+    res.send({users_list: result});
 });
 
 //Function for GET /users/:id endpoint.
