@@ -3,11 +3,6 @@ import React, {useState, useEffect} from "react";
 import Table from "./Table";
 import Form from "./Form";
 
-//create the data
-// const characters = [
-    
-// ];
-
 function MyApp(){
 
     //useState hook used to dynamically change characters by using setCharacters
@@ -70,20 +65,23 @@ function MyApp(){
             .catch((error) => console.log(error));
     }
 
+    //call GET /users
     function fetchUsers() {
         const promise = fetch("http://localhost:8000/users");
         return promise;
     }
 
+    //call POST /users
     function postUser(person) {
         const promise = fetch("Http://localhost:8000/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(person),
+            body: JSON.stringify(person), //Why do we call stringify.
         });
         return promise;
     }
 
+    //call DELETE /users/:id
     function deleteUser(id) {
         const promise = fetch(`Http://localhost:8000/users/${id}` , {
             method: "DELETE"
@@ -93,3 +91,4 @@ function MyApp(){
 }
 
 export default MyApp;
+
