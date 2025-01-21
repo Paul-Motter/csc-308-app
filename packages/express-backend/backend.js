@@ -50,13 +50,17 @@ const users = {
 
 //GET /users Test
 app.get("/users", (req, res) => {
+    //get entire list of users to later narrow down.
     let result = users.users_list;
+    //if searching for a specific job.
     if (req.query.job != undefined){
         result = result.filter((user) => user.job === req.query.job)
     }
+    //if searching for a specific name
     if (req.query.name != undefined){
         result = result.filter((user) => user.name === req.query.name)
     }
+    //send back the user_list.
     res.send({users_list: result});
 });
 
@@ -64,7 +68,6 @@ app.get("/users", (req, res) => {
 const findUserById = (id) => {
     return users.users_list.find((user) => user.id === id);
 };
-
 //GET /users/:id
 app.get("/users/:id", (req, res) => {
     const id = req.params.id;

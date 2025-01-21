@@ -38,15 +38,13 @@ function MyApp(){
     //uses useState with seCharacters.
     //finds the character at the index and removes it from the list of characters and then setCharacters to the updated list.
     function removeOneCharacter(index) {
-        const characterToRemove = characters.filter((character, i) => {
-            return i == index;
-        })[0];
+        const characterToRemove = characters[index];
         //call endpoint.
         deleteUser(characterToRemove.id)
             .then((res) => {
                 //if user not found.
                 if (res.status === 404) {
-                    throw new Error("Resource not found")}
+                    throw new Error(res.body)}
                 //if user found and deleted on backend
                 else if(res.status === 204){
                     setCharacters(characters.filter((character, i) => {
@@ -54,7 +52,7 @@ function MyApp(){
                     }));
                 //any unexpected response.
                 } else {
-                    throw new Error("Improper Status code. " + res.status + " not recognized.")
+                    throw new Error(`Improper Status code. ${res.status}: ${res.body}`)
                 }
             })
             .catch((error) => console.log(error));
@@ -63,9 +61,9 @@ function MyApp(){
     function updateList(person){
         postUser(person)
             .then((res) => {
-                if (res.status !== 201) throw new Error("Improper status code. Is not 201: " + res.status)
+                if (res.status === 201) return res.json();
                 else {
-                    return res.json();
+                    throw new Error(`Improper Status code. ${res.status}: ${res.body}`)
                 }
             })
             .then((json) => setCharacters([...characters, json]))
