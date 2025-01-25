@@ -30,7 +30,7 @@ class StockPortfolio {
                 this.stocks.delete(ticker);
             }
             //resulting shares will be < 0. Cannot happen.
-            else throw Error("Not enough shares.");
+            else throw Error("Not possible to sell this number of shares.");
         }
         //You don't have any shares of the stock.
         else throw Error("Stock is not in your portfolio.");
