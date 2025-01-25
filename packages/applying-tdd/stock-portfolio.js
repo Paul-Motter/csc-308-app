@@ -29,6 +29,11 @@ class StockPortfolio {
         else throw Error("Stock is not in your portfolio.");
     }
 
+    //gets the number of unique ticks within stocks.
+    getNumUniqueTicks(){
+        return this.stocks.size;
+    }
+
     //returns the number of shares for the given stock.
     getShares(ticker){
         if (this.stocks.has(ticker)){

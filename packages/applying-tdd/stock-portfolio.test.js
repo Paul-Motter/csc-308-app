@@ -39,3 +39,20 @@ test("Sell from stocks whose ticker is not in your portfolio.", () => {
     expect(() => myStocks.sellShares("ABC")).toThrow("Stock is not in your portfolio.");
 })
 
+// 2.5
+test("Get number of unique stocks with nothing in the portfolio", () => {
+    const myStocks = new imports.StockPortfolio();
+    const result = myStocks.getNumUniqueTicks();
+    const target = 0;
+    expect(result).toBe(target)
+})
+
+test("Get number of unique stocks with multiple stocks in the portfolio.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 5);
+    myStocks.addStock("DEF", 10);
+    const result = myStocks.getNumUniqueTicks();
+    const target = 2;
+    expect(result).toBe(target)
+
+})
