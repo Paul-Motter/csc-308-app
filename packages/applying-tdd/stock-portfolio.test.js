@@ -2,7 +2,7 @@ const imports = require("./stock-portfolio.js")
 
 /* 
 3. REFLECTION:
-    I felt that I was able to follow the test-first approach most of the time. I found the first requirements to be 
+    I felt that I was able to follow the test-first approach most of the time. I found the first few requirements to be 
 difficult to test due to a lack of appropriate methods to retrieve information. For example, in part 2.4 I had no method 
 for testing if the portfolio was changed. I therefore wrote perhaps too much production code so that I could get results 
 to see if a functionality was actually working. I also thought for part 2.4 that errors, for selling more stocks than 
