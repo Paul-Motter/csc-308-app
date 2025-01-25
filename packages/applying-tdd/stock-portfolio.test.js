@@ -1,6 +1,6 @@
 const imports = require("./stock-portfolio.js")
 
-// 2.1 later adapated to 2.2
+// 2.1 later adapated to 2.2 Tests.
 // 2.2
 test("Check if portfolio is empty.", () => {
     const myStocks = new imports.StockPortfolio();
@@ -76,3 +76,21 @@ test("Add two different stocks and then sell all of one of them. Only one stock 
     const target = 1;
     expect(result).toBe(target);
 })
+
+// 2.7
+test("Get shares of a stock not in portfolio.", () => {
+    const myStocks = new imports.StockPortfolio()
+    const result = myStocks.getShares("ABC");
+    const target = 0;
+    expect(result).toBe(target);
+})
+
+test("Get shares of a stock that is in the portfolio.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 10);
+    const result = myStocks.getShares("ABC");
+    const target = 10;
+    expect(result).toBe(target);
+})
+
+

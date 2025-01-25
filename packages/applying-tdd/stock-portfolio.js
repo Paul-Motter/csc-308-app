@@ -46,7 +46,7 @@ class StockPortfolio {
         if (this.stocks.has(ticker)){
             return this.stocks.get(ticker);
         }
-        else throw Error("Stock is not in your portfolio.");
+        else return 0;
     }
 }
 
