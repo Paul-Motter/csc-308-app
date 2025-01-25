@@ -1,29 +1,40 @@
 
 class StockPortfolio {
-    stocks = [
-        // stock{
-        //     ticker:"",
-        //     shares:0
-        // }
-    ];
+    stocks = new Map();
 
     constructor() {
     }
 
+    //checks if stocks is empty and returns boolean.
     isEmpty(){
-        if (this.stocks.length === 0){
-            return true
+        if (this.stocks.size === 0){
+            return true;
         }
         else return false;
     }
 
+    //Adds a stock with a ticker and shares.
     addStock(ticker, shares){
-        this.stocks.push(
-            {
-                ticker: ticker,
-                shares: shares
+        this.stocks.set(ticker, shares);
+    }
+
+    //subtracts an amount of shares from the given stock.
+    sellShares(ticker, shares){
+        if (this.stocks.has(ticker)) {
+            if(this.stocks.get(ticker) > shares){
+                this.stocks.set(ticker, this.stocks.get(ticker)-shares);
             }
-        )
+            else throw Error("Not enough shares.");
+        }
+        else throw Error("Stock is not in your portfolio.");
+    }
+
+    //returns the number of shares for the given stock.
+    getShares(ticker){
+        if (this.stocks.has(ticker)){
+            return this.stocks.get(ticker);
+        }
+        else throw Error("Stock is not in your portfolio.");
     }
 }
 

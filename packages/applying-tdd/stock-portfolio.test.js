@@ -1,13 +1,6 @@
 const imports = require("./stock-portfolio.js")
 
-// 2.1 
-test("Creating a stock portfolio and have it be empty.", () => {
-    const myStocks = new imports.StockPortfolio();
-    const result = myStocks.stocks;
-    const target = [];
-    expect(result).toEqual(target);
-})
-
+// 2.1 later adapated to 2.2
 // 2.2
 test("Check if portfolio is empty.", () => {
     const myStocks = new imports.StockPortfolio();
@@ -24,3 +17,25 @@ test("Add to portfolio and check if empty.", () => {
     const target = false;
     expect(result).toBe(target);
 })
+
+// 2.4
+test("Add to portfolio and sell some of those stocks.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 12);
+    myStocks.sellShares("ABC", 5);
+    const result = myStocks.getShares("ABC");
+    const target = 7;
+    expect(result).toBe(target);
+})
+
+test("Add to portfolio and sell more of those stocks than you have.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 12);
+    expect(() => myStocks.sellShares("ABC", 17)).toThrow("Not enough shares.");
+})
+
+test("Sell from stocks whose ticker is not in your portfolio.", () => {
+    const myStocks = new imports.StockPortfolio();
+    expect(() => myStocks.sellShares("ABC")).toThrow("Stock is not in your portfolio.");
+})
+
