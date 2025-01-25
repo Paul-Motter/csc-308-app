@@ -1,5 +1,8 @@
 
 class StockPortfolio {
+    //Map to store stocks
+    //Keys: string for ticks
+    //Values: int for the number of shares.
     stocks = new Map();
 
     constructor() {
@@ -15,7 +18,14 @@ class StockPortfolio {
 
     //Adds a stock with a ticker and shares.
     addStock(ticker, shares){
-        this.stocks.set(ticker, shares);
+        //add to shares if stock already exists.
+        if(this.stocks.has(ticker)){
+            this.stocks.set(ticker, this.stocks.get(ticker)+shares);
+        }
+        //Add new stock if not in portfolio.
+        else {
+            this.stocks.set(ticker, shares);
+        }
     }
 
     //subtracts an amount of shares from the given stock.

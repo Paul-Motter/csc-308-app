@@ -32,6 +32,15 @@ test("Add to portfolio and check if empty.", () => {
     expect(result).toBe(target);
 })
 
+test("Add to portfolio and add more shares to it.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 12);
+    myStocks.addStock("ABC", 5);
+    const result = myStocks.getShares("ABC");
+    const target = 17;
+    expect(result).toBe(target);
+})
+
 // 2.4
 test("Add to portfolio and sell some of those stocks.", () => {
     const myStocks = new imports.StockPortfolio();
@@ -68,7 +77,6 @@ test("Get number of unique stocks with multiple stocks in the portfolio.", () =>
     const result = myStocks.getNumUniqueTicks();
     const target = 2;
     expect(result).toBe(target)
-
 })
 
 // 2.6 
