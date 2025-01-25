@@ -21,11 +21,18 @@ class StockPortfolio {
     //subtracts an amount of shares from the given stock.
     sellShares(ticker, shares){
         if (this.stocks.has(ticker)) {
+            //resulting shares will be > 0.
             if(this.stocks.get(ticker) > shares){
                 this.stocks.set(ticker, this.stocks.get(ticker)-shares);
             }
+            //resulting shares will be === 0.
+            else if(this.stocks.get(ticker) === shares){
+                this.stocks.delete(ticker);
+            }
+            //resulting shares will be < 0. Cannot happen.
             else throw Error("Not enough shares.");
         }
+        //You don't have any shares of the stock.
         else throw Error("Stock is not in your portfolio.");
     }
 

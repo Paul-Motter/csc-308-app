@@ -56,3 +56,23 @@ test("Get number of unique stocks with multiple stocks in the portfolio.", () =>
     expect(result).toBe(target)
 
 })
+
+// 2.6 
+test("Add a stock and then sell all of them. The stock should no longer be in the portfolio.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 15);
+    myStocks.sellShares("ABC", 15);
+    const result = myStocks.getNumUniqueTicks();
+    const target = 0;
+    expect(result).toBe(target);
+})
+
+test("Add two different stocks and then sell all of one of them. Only one stock should still be in the portfolio.", () => {
+    const myStocks = new imports.StockPortfolio();
+    myStocks.addStock("ABC", 15);
+    myStocks.addStock("DEF", 30)
+    myStocks.sellShares("ABC", 15);
+    const result = myStocks.getNumUniqueTicks();
+    const target = 1;
+    expect(result).toBe(target);
+})
