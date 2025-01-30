@@ -35,7 +35,7 @@ function MyApp(){
     function removeOneCharacter(index) {
         const characterToRemove = characters[index];
         //call endpoint.
-        deleteUser(characterToRemove.id)
+        deleteUser(characterToRemove._id)
             .then((res) => {
                 //if user not found.
                 if (res.status === 404) {
@@ -82,8 +82,8 @@ function MyApp(){
     }
 
     //call DELETE /users/:id
-    function deleteUser(id) {
-        const promise = fetch(`Http://localhost:8000/users/${id}` , {
+    function deleteUser(_id) {
+        const promise = fetch(`Http://localhost:8000/users/${_id}` , {
             method: "DELETE"
         })
         return promise;
